@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 
 
+
 class UserController extends Controller
 {
 
@@ -27,10 +28,14 @@ class UserController extends Controller
         $user = User::where(["email" =>$req->email])->first();
         // return $user->password;
         if (!$user || !Hash::check($req->password, $user->password)) {
-            return "Username or password is not matched";
-        } else {
-            $req->session()->put('User', $user);
             return redirect("/");
+
+            // return "Username or password is not matched";
+        } else {
+            return "Username or password is not matched";
+            // $req->session()->put('User', $user);
+            // return redirect("/");
+
         }
     }
 }
